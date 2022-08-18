@@ -7,9 +7,8 @@ import axios from 'axios';
 const SwapableItem = ({title, subtitle, todoID, updateData}) => {
   const deleteData = todoID => {
     axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
-      // update;
-      // console.log(update);
-      // alert('ok');
+      alert('deleted');
+      updateData();
     });
   };
 
@@ -62,8 +61,7 @@ const SwapableItem = ({title, subtitle, todoID, updateData}) => {
             // update();
 
             deleteData(todoID);
-            console.log('Delete Pressed');
-            updateData();
+
             reset();
           }}
           style={{

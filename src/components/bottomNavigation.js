@@ -3,7 +3,7 @@ import React, {useEffect, useState} from 'react';
 import ModalComponent from './Modal';
 import axios from 'axios';
 
-const BottomNavigation = () => {
+const BottomNavigation = ({updateData}) => {
   const getData = () => {
     axios.get('http://192.168.1.11:3000/todos').then(res => {
       console.log(res);
@@ -19,8 +19,8 @@ const BottomNavigation = () => {
   return (
     <View style={{backgroundColor: '#F9F9F9', position: 'relative'}}>
       <ModalComponent
-        updateData={() => {
-          alert('posted');
+        updateDataModal={() => {
+          updateData();
         }}
       />
       <View

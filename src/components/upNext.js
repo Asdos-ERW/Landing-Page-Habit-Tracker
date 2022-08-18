@@ -5,26 +5,13 @@ import axios from 'axios';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 
-const UpNext = () => {
-  const getData = () => {
-    axios.get('http://192.168.1.11:3000/todos').then(res => {
-      console.log(res);
-      setTodos(res.data);
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const [todos, setTodos] = useState([]);
-
+const UpNext = ({todosUpNext, updateTodos}) => {
   return (
     <View style={{paddingBottom: 20, marginTop: 20, borderWidth: 2}}>
       <Text style={{fontSize: 14, color: '#666666', paddingHorizontal: 20}}>
         Up Next
       </Text>
-      {todos.map(todo => {
+      {todosUpNext.map(todo => {
         return (
           <SwapableItem
             key={todo.id}
@@ -32,7 +19,7 @@ const UpNext = () => {
             subtitle={todo.subtitle}
             todoID={todo}
             updateData={() => {
-              getData();
+              updateTodos();
             }}
           />
         );

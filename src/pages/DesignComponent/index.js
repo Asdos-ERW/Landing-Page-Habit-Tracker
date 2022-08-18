@@ -15,19 +15,40 @@ import UpNext from '../../components/upNext';
 import Completed from '../../components/completed';
 import AccordionView from '../../components/collapseCalendar';
 import BottomNavigation from '../../components/bottomNavigation';
+import axios from 'axios';
 
 const index = () => {
+  const getData = () => {
+    axios.get('http://192.168.1.11:3000/todos').then(res => {
+      setTodos(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const [todos, setTodos] = useState([]);
   return (
     <View style={{position: 'relative', flex: 1}}>
       <StatusBar backgroundColor={'#F9F9F9'} barStyle={'dark-content'} />
       <ScrollView style={styles.container}>
         <Profile />
         <AccordionView />
-        <UpNext />
+        <UpNext
+          todosUpNext={todos}
+          updateTodos={() => {
+            getData();
+          }}
+        />
         <Completed />
       </ScrollView>
 
-      <BottomNavigation />
+      <BottomNavigation
+        updateData={() => {
+          getData();
+        }}
+      />
     </View>
   );
 };
