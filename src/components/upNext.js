@@ -5,7 +5,13 @@ import axios from 'axios';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 
-const UpNext = ({todosUpNext, updateTodos, showModal, checkItemId}) => {
+const UpNext = ({
+  todosUpNext,
+  updateTodos,
+  showModal,
+  checkItemId,
+  buttonHabitUpNext,
+}) => {
   return (
     <View style={{paddingBottom: 20, marginTop: 20}}>
       <Text style={{fontSize: 14, color: '#666666', paddingHorizontal: 20}}>
@@ -24,6 +30,9 @@ const UpNext = ({todosUpNext, updateTodos, showModal, checkItemId}) => {
             }}
             showModalSwipe={() => {
               showModal();
+            }}
+            buttonHabitSwipe={() => {
+              buttonHabitUpNext();
             }}
           />
         );

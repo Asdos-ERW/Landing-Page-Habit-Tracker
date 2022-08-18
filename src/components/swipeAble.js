@@ -11,6 +11,7 @@ const SwapableItem = ({
   updateData,
   showModalSwipe,
   checkId,
+  buttonHabitSwipe,
 }) => {
   const deleteData = todoID => {
     axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
@@ -137,6 +138,7 @@ const SwapableItem = ({
             onPress={event => {
               checkId(todoID.id);
               showModalSwipe();
+              buttonHabitSwipe();
             }}>
             <Image
               style={{width: 24, height: 24}}

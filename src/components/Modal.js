@@ -50,6 +50,8 @@ function ModalComponent({
   showModalComponent,
   visibleModal,
   modalID,
+  buttonHabitModal,
+  changeButtonHabitModal,
 }) {
   const akhirID = modalID;
 
@@ -86,12 +88,12 @@ function ModalComponent({
       });
     };
 
-    if (buatHabit == 'BUAT HABIT') {
+    if (buttonHabitModal == 'BUAT HABIT') {
       axios.post('http://192.168.1.11:3000/todos', data).then(() => {
         updateDataModal();
-        setBuatHabit('UPDATE');
+        // setBuatHabit('UPDATE');
       });
-    } else if (buatHabit == 'UPDATE') {
+    } else if (buttonHabitModal == 'UPDATE') {
       putData(akhirID);
     }
   };
@@ -164,6 +166,7 @@ function ModalComponent({
       <PlusButton
         onPress={() => {
           showModalComponent();
+          changeButtonHabitModal();
         }}
       />
       <Modal
@@ -385,7 +388,7 @@ function ModalComponent({
               postData(akhirID);
             }}>
             <Text style={{color: '#252525', fontWeight: 'bold', fontSize: 14}}>
-              {buatHabit}
+              {buttonHabitModal}
             </Text>
           </TouchableOpacity>
         </ScrollView>

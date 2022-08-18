@@ -9,6 +9,8 @@ const BottomNavigation = ({
   visible,
   // putDataBottomNav,
   bottomNavId,
+  buttonHabitBotNav,
+  changeButtonHabitBotNav,
 }) => {
   const getData = () => {
     axios.get('http://192.168.1.11:3000/todos').then(res => {
@@ -35,6 +37,10 @@ const BottomNavigation = ({
           putDataBottomNav(data);
         }}
         modalID={bottomNavId}
+        buttonHabitModal={buttonHabitBotNav}
+        changeButtonHabitModal={() => {
+          changeButtonHabitBotNav();
+        }}
       />
       <View
         style={{

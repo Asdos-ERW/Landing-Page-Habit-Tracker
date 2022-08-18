@@ -52,6 +52,9 @@ const index = () => {
     console.log(id);
   };
 
+  const [buttonHabit, setButtonHabit] = useState('BUAT HABIT');
+  // const [resetButtonHabit, setResetButtonHabit] = useState()
+
   const [todos, setTodos] = useState([]);
   return (
     <View style={{position: 'relative', flex: 1}}>
@@ -71,6 +74,9 @@ const index = () => {
           putDataUpNext={() => {
             putData();
           }}
+          buttonHabitUpNext={() => {
+            setButtonHabit('UPDATE');
+          }}
         />
         <Completed />
       </ScrollView>
@@ -84,6 +90,10 @@ const index = () => {
         }}
         visible={isModalVisible}
         bottomNavId={id}
+        buttonHabitBotNav={buttonHabit}
+        changeButtonHabitBotNav={() => {
+          setButtonHabit('BUAT HABIT');
+        }}
       />
     </View>
   );
