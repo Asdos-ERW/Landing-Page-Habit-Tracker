@@ -45,9 +45,8 @@ const TimePicker = () => {
   );
 };
 
-function ModalComponent() {
+function ModalComponent({updateData}) {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
   const [iconBorder1, setIconBorder1] = useState('white');
   const [iconBorder2, setIconBorder2] = useState('white');
   const [iconBorder3, setIconBorder3] = useState('white');
@@ -62,23 +61,6 @@ function ModalComponent() {
 
   const [activity, setActivity] = useState('');
   const [activityDesc, setActivityDesc] = useState('');
-  const [activityObj, setActivityObj] = useState({
-    title: activity,
-    subtitle: activityDesc,
-  });
-
-  // const updateInfo = (title, subtitle) => {
-  //   setActivity(title);
-  //   setActivityDesc(subtitle);
-  //   console.log(activity);
-  //   console.log(activityDesc);
-  // };
-
-  const getData = () => {
-    axios.get('http://192.168.1.11:3000/todos').then(res => {
-      console.log(res);
-    });
-  };
 
   const postData = () => {
     const data = {
@@ -88,7 +70,6 @@ function ModalComponent() {
 
     axios.post('http://192.168.1.11:3000/todos', data).then(res => {
       console.log(res);
-      getData();
     });
   };
 
@@ -373,6 +354,7 @@ function ModalComponent() {
             onPress={() => {
               toggleModal();
               postData();
+              updateData();
             }}>
             <Text style={{color: '#252525', fontWeight: 'bold', fontSize: 14}}>
               BUAT HABIT

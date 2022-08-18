@@ -1,11 +1,28 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ModalComponent from './Modal';
+import axios from 'axios';
 
 const BottomNavigation = () => {
+  const getData = () => {
+    axios.get('http://192.168.1.11:3000/todos').then(res => {
+      console.log(res);
+      setTodos(res.data);
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const [todos, setTodos] = useState([]);
   return (
     <View style={{backgroundColor: '#F9F9F9', position: 'relative'}}>
-      <ModalComponent />
+      <ModalComponent
+        updateData={() => {
+          alert('posted');
+        }}
+      />
       <View
         style={{
           height: 70,

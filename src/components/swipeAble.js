@@ -4,14 +4,15 @@ import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 
-const deleteData = todoID => {
-  axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
-    axios.get('http://192.168.1.11:3000/todos').then(res => {
-      console.log('respon setelah get : ', res);
+const SwapableItem = ({title, subtitle, todoID, updateData}) => {
+  const deleteData = todoID => {
+    axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
+      // update;
+      // console.log(update);
+      // alert('ok');
     });
-  });
-};
-const SwapableItem = ({title, subtitle, todoID}) => {
+  };
+
   return (
     <ListItem.Swipeable
       style={{
@@ -57,8 +58,12 @@ const SwapableItem = ({title, subtitle, todoID}) => {
       rightContent={reset => (
         <TouchableOpacity
           onPress={() => {
+            // console.log(update);
+            // update();
+
             deleteData(todoID);
             console.log('Delete Pressed');
+            updateData();
             reset();
           }}
           style={{
