@@ -5,7 +5,7 @@ import axios from 'axios';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 
-const UpNext = ({todosUpNext, updateTodos}) => {
+const UpNext = ({todosUpNext, updateTodos, showModal, checkItemId}) => {
   return (
     <View style={{paddingBottom: 20, marginTop: 20}}>
       <Text style={{fontSize: 14, color: '#666666', paddingHorizontal: 20}}>
@@ -14,12 +14,16 @@ const UpNext = ({todosUpNext, updateTodos}) => {
       {todosUpNext.map(todo => {
         return (
           <SwapableItem
+            checkId={checkItemId}
             key={todo.id}
             title={todo.title}
             subtitle={todo.subtitle}
             todoID={todo}
             updateData={() => {
               updateTodos();
+            }}
+            showModalSwipe={() => {
+              showModal();
             }}
           />
         );

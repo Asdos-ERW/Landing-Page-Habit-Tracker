@@ -8,7 +8,7 @@ const PlusButton = ({onPress}) => {
       style={{
         width: 55,
         height: 55,
-        backgroundColor: '#FF844B',
+        backgroundColor: '#FFBE5C',
         borderRadius: 50,
         position: 'absolute',
         right: 20,

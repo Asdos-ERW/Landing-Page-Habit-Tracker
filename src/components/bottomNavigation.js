@@ -3,10 +3,15 @@ import React, {useEffect, useState} from 'react';
 import ModalComponent from './Modal';
 import axios from 'axios';
 
-const BottomNavigation = ({updateData}) => {
+const BottomNavigation = ({
+  updateData,
+  showModal,
+  visible,
+  // putDataBottomNav,
+  bottomNavId,
+}) => {
   const getData = () => {
     axios.get('http://192.168.1.11:3000/todos').then(res => {
-      console.log(res);
       setTodos(res.data);
     });
   };
@@ -22,6 +27,14 @@ const BottomNavigation = ({updateData}) => {
         updateDataModal={() => {
           updateData();
         }}
+        showModalComponent={() => {
+          showModal();
+        }}
+        visibleModal={visible}
+        putDataModal={() => {
+          putDataBottomNav(data);
+        }}
+        modalID={bottomNavId}
       />
       <View
         style={{

@@ -53,7 +53,7 @@ class AccordionView extends Component {
             // backgroundColor: 'white',
             // paddingHorizontal: 20,
             borderWidth: 2,
-            borderColor: '#FF844B',
+            borderColor: '#FFBE5C',
             borderRadius: 10,
           }}
           underlayColor={'#FF844B'}

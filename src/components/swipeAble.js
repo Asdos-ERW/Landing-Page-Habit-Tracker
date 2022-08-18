@@ -4,7 +4,14 @@ import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 
-const SwapableItem = ({title, subtitle, todoID, updateData}) => {
+const SwapableItem = ({
+  title,
+  subtitle,
+  todoID,
+  updateData,
+  showModalSwipe,
+  checkId,
+}) => {
   const deleteData = todoID => {
     axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
       updateData();
@@ -14,11 +21,11 @@ const SwapableItem = ({title, subtitle, todoID, updateData}) => {
   const showAlert = () =>
     Alert.alert('PERINGATAN!', 'Apakah Anda yakin akan menghapus task ini?', [
       {
-        text: 'Cancel',
+        text: 'TIDAK',
         onPress: () => console.log('Cancel Pressed'),
         style: 'cancel',
       },
-      {text: 'OK', onPress: () => deleteData(todoID)},
+      {text: 'YA', onPress: () => deleteData(todoID)},
     ]);
 
   return (
@@ -126,7 +133,16 @@ const SwapableItem = ({title, subtitle, todoID, updateData}) => {
               <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
             </View>
           </View>
-          <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text>
+          <TouchableOpacity
+            onPress={event => {
+              checkId(todoID.id);
+              showModalSwipe();
+            }}>
+            <Image
+              style={{width: 24, height: 24}}
+              source={require('../images/icon-edit.png')}
+            />
+          </TouchableOpacity>
         </View>
       </ListItem.Content>
     </ListItem.Swipeable>

@@ -45,8 +45,14 @@ const TimePicker = () => {
   );
 };
 
-function ModalComponent({updateDataModal}) {
-  const [isModalVisible, setModalVisible] = useState(false);
+function ModalComponent({
+  updateDataModal,
+  showModalComponent,
+  visibleModal,
+  modalID,
+}) {
+  const akhirID = modalID;
+
   const [iconBorder1, setIconBorder1] = useState('white');
   const [iconBorder2, setIconBorder2] = useState('white');
   const [iconBorder3, setIconBorder3] = useState('white');
@@ -62,20 +68,37 @@ function ModalComponent({updateDataModal}) {
   const [activity, setActivity] = useState('');
   const [activityDesc, setActivityDesc] = useState('');
 
-  const postData = () => {
+  const [buatHabit, setBuatHabit] = useState('BUAT HABIT');
+
+  const postData = akhirID => {
     const data = {
       title: activity,
       subtitle: activityDesc,
     };
 
-    axios.post('http://192.168.1.11:3000/todos', data).then(() => {
-      updateDataModal();
-    });
+    const putData = akhirID => {
+      // alert('nice');
+      axios.put(`http://192.168.1.11:3000/todos/${akhirID}`, data).then(res => {
+        console.log(res);
+        console.log(akhirID);
+        updateDataModal();
+        setBuatHabit('BUAT HABIT');
+      });
+    };
+
+    if (buatHabit == 'BUAT HABIT') {
+      axios.post('http://192.168.1.11:3000/todos', data).then(() => {
+        updateDataModal();
+        setBuatHabit('UPDATE');
+      });
+    } else if (buatHabit == 'UPDATE') {
+      putData(akhirID);
+    }
   };
 
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
+  // const toggleModal = () => {
+  //   setModalVisible(!isModalVisible);
+  // };
 
   const iconPressed = icon => {
     switch (icon) {
@@ -138,13 +161,19 @@ function ModalComponent({updateDataModal}) {
 
   return (
     <View>
-      <PlusButton onPress={toggleModal} />
+      <PlusButton
+        onPress={() => {
+          showModalComponent();
+        }}
+      />
       <Modal
         avoidKeyboard={true}
-        onBackButtonPress={toggleModal}
+        onBackButtonPress={() => {
+          showModalComponent();
+        }}
         backdropTransitionOutTiming={0}
         swipeDirection={'down'}
-        isVisible={isModalVisible}
+        isVisible={visibleModal}
         style={{margin: 0, position: 'relative'}}>
         <ScrollView
           style={{
@@ -352,11 +381,11 @@ function ModalComponent({updateDataModal}) {
               borderRadius: 5,
             }}
             onPress={() => {
-              toggleModal();
-              postData();
+              showModalComponent();
+              postData(akhirID);
             }}>
             <Text style={{color: '#252525', fontWeight: 'bold', fontSize: 14}}>
-              BUAT HABIT
+              {buatHabit}
             </Text>
           </TouchableOpacity>
         </ScrollView>
