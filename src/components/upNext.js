@@ -7,7 +7,7 @@ import {Dimensions} from 'react-native';
 
 const UpNext = ({todosUpNext, updateTodos}) => {
   return (
-    <View style={{paddingBottom: 20, marginTop: 20, borderWidth: 2}}>
+    <View style={{paddingBottom: 20, marginTop: 20}}>
       <Text style={{fontSize: 14, color: '#666666', paddingHorizontal: 20}}>
         Up Next
       </Text>

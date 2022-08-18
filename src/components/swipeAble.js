@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
 import React, {useEffect} from 'react';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
@@ -7,10 +7,19 @@ import axios from 'axios';
 const SwapableItem = ({title, subtitle, todoID, updateData}) => {
   const deleteData = todoID => {
     axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
-      alert('deleted');
       updateData();
     });
   };
+
+  const showAlert = () =>
+    Alert.alert('PERINGATAN!', 'Apakah Anda yakin akan menghapus task ini?', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => deleteData(todoID)},
+    ]);
 
   return (
     <ListItem.Swipeable
@@ -59,8 +68,8 @@ const SwapableItem = ({title, subtitle, todoID, updateData}) => {
           onPress={() => {
             // console.log(update);
             // update();
-
-            deleteData(todoID);
+            showAlert();
+            // deleteData(todoID);
 
             reset();
           }}
