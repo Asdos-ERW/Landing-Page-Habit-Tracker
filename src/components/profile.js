@@ -23,7 +23,7 @@ const Profile = () => {
         }}>
         <View>
           <Text style={{fontWeight: 'bold', color: '#0D0C0C', fontSize: 16}}>
-            Hello PANES!
+            Hello Slebew!
           </Text>
           <Text style={{color: '#9F9F9F', fontSize: 13}}>Monday, 28 Jan</Text>
         </View>
