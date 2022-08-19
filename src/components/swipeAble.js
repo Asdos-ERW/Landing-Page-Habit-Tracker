@@ -12,6 +12,7 @@ const SwapableItem = ({
   showModalSwipe,
   checkId,
   buttonHabitSwipe,
+  updateDataCom,
 }) => {
   const deleteData = todoID => {
     axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
@@ -19,7 +20,21 @@ const SwapableItem = ({
     });
   };
 
-  const showAlert = () =>
+  const completedData = () => {
+    axios
+      .post('http://192.168.1.11:3000/completedTodos', {
+        title,
+        subtitle,
+      })
+      .then(() => {
+        axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
+          updateData();
+          updateDataCom();
+        });
+      });
+  };
+
+  const showAlertDelete = () => {
     Alert.alert('PERINGATAN!', 'Apakah Anda yakin akan menghapus task ini?', [
       {
         text: 'TIDAK',
@@ -28,6 +43,13 @@ const SwapableItem = ({
       },
       {text: 'YA', onPress: () => deleteData(todoID)},
     ]);
+  };
+
+  const showAlertCompleted = () => {
+    Alert.alert('CONGRATULATIONS!', 'Good Job 👍', [
+      {text: 'OK', onPress: () => console.log('completed pressed')},
+    ]);
+  };
 
   return (
     <ListItem.Swipeable
@@ -43,7 +65,8 @@ const SwapableItem = ({
       leftContent={reset => (
         <TouchableOpacity
           onPress={() => {
-            alert('Done Pressed');
+            showAlertCompleted();
+            completedData();
             reset();
           }}
           style={{
@@ -76,7 +99,7 @@ const SwapableItem = ({
           onPress={() => {
             // console.log(update);
             // update();
-            showAlert();
+            showAlertDelete();
             // deleteData(todoID);
 
             reset();

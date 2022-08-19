@@ -23,26 +23,22 @@ const index = () => {
     setModalVisible(!isModalVisible);
   };
 
-  // const putData = () => {
-  //   // alert('nice');
-  //   axios
-  //     .put(`http://192.168.1.11:3000/todos/${id}`, {
-  //       title: 'tes',
-  //       subtitle: 'nice',
-  //     })
-  //     .then(res => {
-  //       console.log(res);
-  //     });
-  // };
-
   const getData = () => {
     axios.get('http://192.168.1.11:3000/todos').then(res => {
       setTodos(res.data);
     });
   };
 
+  const getComData = () => {
+    axios.get('http://192.168.1.11:3000/completedTodos').then(res => {
+      console.log(res.data);
+      setCompletedTodos(res.data);
+    });
+  };
+
   useEffect(() => {
     getData();
+    getComData();
   }, []);
 
   const [id, setId] = useState(0);
@@ -53,9 +49,10 @@ const index = () => {
   };
 
   const [buttonHabit, setButtonHabit] = useState('BUAT HABIT');
-  // const [resetButtonHabit, setResetButtonHabit] = useState()
 
   const [todos, setTodos] = useState([]);
+  const [completedTodos, setCompletedTodos] = useState([]);
+
   return (
     <View style={{position: 'relative', flex: 1}}>
       <StatusBar backgroundColor={'#F9F9F9'} barStyle={'dark-content'} />
@@ -77,8 +74,16 @@ const index = () => {
           buttonHabitUpNext={() => {
             setButtonHabit('UPDATE');
           }}
+          updateComTodos={() => {
+            getComData();
+          }}
         />
-        <Completed />
+        <Completed
+          comTodos={completedTodos}
+          updateData={() => {
+            getComData();
+          }}
+        />
       </ScrollView>
 
       <BottomNavigation

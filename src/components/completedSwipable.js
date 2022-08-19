@@ -1,10 +1,29 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
 import React from 'react';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
+import axios from 'axios';
 
-const CompletedSwipable = props => {
-  console.log(props);
+const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
+  const deleteData = () => {
+    axios
+      .delete(`http://192.168.1.11:3000/completedTodos/${idCom.id}`)
+      .then(() => {
+        updateDataCom();
+      });
+  };
+
+  const showAlertDelete = () => {
+    Alert.alert('PERINGATAN!', 'Apakah Anda yakin akan menghapus task ini?', [
+      {
+        text: 'TIDAK',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'YA', onPress: () => deleteData()},
+    ]);
+  };
+
   return (
     <View style={{opacity: 0.85}}>
       <ListItem.Swipeable
@@ -54,7 +73,7 @@ const CompletedSwipable = props => {
         rightContent={reset => (
           <TouchableOpacity
             onPress={() => {
-              alert('Delete Pressed');
+              showAlertDelete();
               reset();
             }}
             style={{
@@ -107,14 +126,14 @@ const CompletedSwipable = props => {
               <View>
                 <Text
                   style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
-                  Clip Project Team
+                  {titleCom}
                 </Text>
                 <Text style={{color: '#9F9F9F', fontSize: 11}}>
-                  Revision & Discuss
+                  {subtitleCom}
                 </Text>
               </View>
             </View>
-            <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
           </View>
         </ListItem.Content>
       </ListItem.Swipeable>

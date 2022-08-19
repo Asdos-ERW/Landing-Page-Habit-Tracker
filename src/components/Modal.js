@@ -384,6 +384,8 @@ function ModalComponent({
               borderRadius: 5,
             }}
             onPress={() => {
+              setActivity('');
+              setActivityDesc('');
               showModalComponent();
               postData(akhirID);
             }}>

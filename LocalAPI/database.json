@@ -1,14 +1,4 @@
 {
-  "todos": [
-    {
-      "title": "Nice 3",
-      "subtitle": "Hehe",
-      "id": 11
-    },
-    {
-      "title": "TURU ges",
-      "subtitle": "Hehe",
-      "id": 12
-    }
-  ]
+  "todos": [],
+  "completedTodos": []
 }
