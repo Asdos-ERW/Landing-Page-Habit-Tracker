@@ -7,13 +7,13 @@ const BottomNavigation = ({
   updateData,
   showModal,
   visible,
-  // putDataBottomNav,
   bottomNavId,
   buttonHabitBotNav,
   changeButtonHabitBotNav,
+  iconBottom,
 }) => {
   const getData = () => {
-    axios.get('http://192.168.1.11:3000/todos').then(res => {
+    axios.get('http://192.168.1.4:3000/todos').then(res => {
       setTodos(res.data);
     });
   };
@@ -41,6 +41,7 @@ const BottomNavigation = ({
         changeButtonHabitModal={() => {
           changeButtonHabitBotNav();
         }}
+        iconModal={iconBottom}
       />
       <View
         style={{

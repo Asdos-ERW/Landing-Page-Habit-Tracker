@@ -1,15 +1,40 @@
 import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
 
-const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
+const CompletedSwipable = ({
+  titleCom,
+  subtitleCom,
+  idCom,
+  updateData,
+  todos,
+  iconCom,
+}) => {
+  const [completed, setCompleted] = useState([]);
+
+  let iconPicked = `../images/${iconCom}`;
+  console.log(iconPicked);
   const deleteData = () => {
+    // console.log(idCom);
     axios
-      .delete(`http://192.168.1.11:3000/completedTodos/${idCom.id}`)
+      .delete(
+        `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${idCom.id}`,
+      )
       .then(() => {
-        updateDataCom();
+        updateData();
+      });
+  };
+
+  const undoData = () => {
+    axios
+      .patch(
+        `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${idCom.id}`,
+        {status: false},
+      )
+      .then(() => {
+        updateData();
       });
   };
 
@@ -22,6 +47,124 @@ const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
       },
       {text: 'YA', onPress: () => deleteData()},
     ]);
+  };
+
+  const returnFunction = icon => {
+    if (icon == '../images/yellow-icon.png') {
+      return (
+        <ListItem.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+              // borderWidth: 1,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                source={require('../images/yellow-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {titleCom}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>
+                  {subtitleCom}
+                </Text>
+              </View>
+            </View>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/green-icon.png') {
+      return (
+        <ListItem.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+              // borderWidth: 1,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                source={require('../images/green-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {titleCom}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>
+                  {subtitleCom}
+                </Text>
+              </View>
+            </View>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/purple-icon.png') {
+      return (
+        <ListItem.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+              // borderWidth: 1,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                source={require('../images/purple-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {titleCom}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>
+                  {subtitleCom}
+                </Text>
+              </View>
+            </View>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
+          </View>
+        </ListItem.Content>
+      );
+    }
   };
 
   return (
@@ -42,7 +185,8 @@ const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
         leftContent={reset => (
           <TouchableOpacity
             onPress={() => {
-              alert('Undo Pressed');
+              undoData();
+              // alert('Undo Pressed');
               reset();
             }}
             style={{
@@ -83,14 +227,9 @@ const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
               backgroundColor: '#FFA0A0',
               width: Dimensions.get('window').width / 2 - 20,
               height: '79%',
-              // height: '60%',
-              // marginVertical: 20,
               marginTop: 20,
               marginLeft: -70,
               justifyContent: 'center',
-              // marginBottom: -20,
-              // marginHorizontal: 20,
-              // paddingBottom: 20,
             }}>
             <Image
               style={{width: 18, height: 21, position: 'absolute', right: 50}}
@@ -98,44 +237,7 @@ const CompletedSwipable = ({titleCom, subtitleCom, idCom, updateDataCom}) => {
             />
           </TouchableOpacity>
         )}>
-        {/* <Button title="My Icon" /> */}
-        <ListItem.Content
-        // style={{borderWidth: 1}}
-        >
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              // borderWidth: 1,
-              // flex: 1,
-              width: '100%',
-              justifyContent: 'space-between',
-              // borderWidth: 1,
-            }}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Image
-                style={{
-                  width: 48,
-                  height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
-                }}
-                source={require('../images/green-icon.png')}
-                // source={require(`${props.url}`)}
-              />
-              <View>
-                <Text
-                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
-                  {titleCom}
-                </Text>
-                <Text style={{color: '#9F9F9F', fontSize: 11}}>
-                  {subtitleCom}
-                </Text>
-              </View>
-            </View>
-            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
-          </View>
-        </ListItem.Content>
+        {returnFunction(iconPicked)}
       </ListItem.Swipeable>
     </View>
   );

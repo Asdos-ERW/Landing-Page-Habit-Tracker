@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import SwapableItem from './swipeAble';
 import axios from 'axios';
@@ -12,9 +12,23 @@ const UpNext = ({
   showModal,
   checkItemId,
   buttonHabitUpNext,
+  iconUpnext,
 }) => {
-  console.log('todos :', todosUpNext);
-  if (todosUpNext.length == 0) {
+  // const showAlert = () => {
+  //   Alert.alert('nice');
+  // };
+
+  const checkEmpty = dataToCheck => {
+    dataToCheck.forEach(data => {
+      if (data.status == false) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+  };
+
+  if (checkEmpty(todosUpNext)) {
     return (
       <View style={{paddingBottom: 20, marginTop: 20}}>
         <Text style={{fontSize: 14, color: '#666666', paddingHorizontal: 20}}>
@@ -38,12 +52,13 @@ const UpNext = ({
           Up Next
         </Text>
         {todosUpNext.map(todo => {
-          return (
+          return todo.status == false ? (
             <SwapableItem
               checkId={checkItemId}
               key={todo.id}
-              title={todo.title}
-              subtitle={todo.subtitle}
+              title={todo.name}
+              subtitle={todo.description}
+              iconSwap={todo.icon}
               todoID={todo}
               updateData={() => {
                 updateTodos();
@@ -58,7 +73,7 @@ const UpNext = ({
                 buttonHabitUpNext();
               }}
             />
-          );
+          ) : null;
         })}
       </View>
     );

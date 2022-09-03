@@ -8,7 +8,6 @@ const SECTIONS = [
     title: 'See Calendar ...',
   },
 ];
-
 class AccordionView extends Component {
   state = {
     activeSections: [],
@@ -29,7 +28,7 @@ class AccordionView extends Component {
     );
   };
 
-  _renderContent = section => {
+  _renderContent = () => {
     return <CalendarComponent />;
   };
 
@@ -42,16 +41,12 @@ class AccordionView extends Component {
       <View style={{marginTop: 20}}>
         <Accordion
           containerStyle={{
-            // backgroundColor: '#white',
             flex: 1,
-            // paddingVertical: 10,
             borderRadius: 15,
             overflow: 'hidden',
             marginHorizontal: 20,
           }}
           sectionContainerStyle={{
-            // backgroundColor: 'white',
-            // paddingHorizontal: 20,
             borderWidth: 2,
             borderColor: '#FFBE5C',
             borderRadius: 10,

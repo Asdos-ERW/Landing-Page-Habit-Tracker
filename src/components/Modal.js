@@ -52,12 +52,15 @@ function ModalComponent({
   modalID,
   buttonHabitModal,
   changeButtonHabitModal,
+  iconModal,
 }) {
   const akhirID = modalID;
 
   const [iconBorder1, setIconBorder1] = useState('white');
   const [iconBorder2, setIconBorder2] = useState('white');
   const [iconBorder3, setIconBorder3] = useState('white');
+
+  const [iconPicked, setIconPicked] = useState('green-icon.png');
 
   const [bgDay1, setBgDay1] = useState('white');
   const [bgDay2, setBgDay2] = useState('white');
@@ -74,33 +77,40 @@ function ModalComponent({
 
   const postData = akhirID => {
     const data = {
-      title: activity,
-      subtitle: activityDesc,
+      name: activity,
+      description: activityDesc,
+      status: false,
+      icon: iconPicked,
     };
 
     const putData = akhirID => {
       // alert('nice');
-      axios.put(`http://192.168.1.11:3000/todos/${akhirID}`, data).then(res => {
-        console.log(res);
-        console.log(akhirID);
-        updateDataModal();
-        setBuatHabit('BUAT HABIT');
-      });
+      axios
+        .put(
+          `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${akhirID}`,
+          data,
+        )
+        .then(res => {
+          // console.log(res);
+          // console.log(akhirID);
+          updateDataModal();
+          setBuatHabit('BUAT HABIT');
+        });
     };
 
     if (buttonHabitModal == 'BUAT HABIT') {
-      axios.post('http://192.168.1.11:3000/todos', data).then(() => {
-        updateDataModal();
-        // setBuatHabit('UPDATE');
-      });
+      axios
+        .post('https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/', data)
+        .then(() => {
+          iconModal(iconPicked);
+          updateDataModal();
+          alert('data posted');
+          // setBuatHabit('UPDATE');
+        });
     } else if (buttonHabitModal == 'UPDATE') {
       putData(akhirID);
     }
   };
-
-  // const toggleModal = () => {
-  //   setModalVisible(!isModalVisible);
-  // };
 
   const iconPressed = icon => {
     switch (icon) {
@@ -108,6 +118,7 @@ function ModalComponent({
         setIconBorder1('#A8A8A8');
         setIconBorder2('white');
         setIconBorder3('white');
+        setIconPicked('yellow-icon.png');
         break;
       }
 
@@ -115,6 +126,7 @@ function ModalComponent({
         setIconBorder1('white');
         setIconBorder2('#A8A8A8');
         setIconBorder3('white');
+        setIconPicked('green-icon.png');
         break;
       }
 
@@ -122,6 +134,7 @@ function ModalComponent({
         setIconBorder1('white');
         setIconBorder2('white');
         setIconBorder3('#A8A8A8');
+        setIconPicked('purple-icon.png');
         break;
       }
     }
@@ -199,7 +212,6 @@ function ModalComponent({
               value={activity}
               onChangeText={value => {
                 setActivity(value);
-                // console.log(activity);
               }}
               maxLength={20}
               style={{

@@ -1,5 +1,5 @@
 import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ListItem} from '@rneui/themed';
 import {Dimensions} from 'react-native';
 import axios from 'axios';
@@ -12,25 +12,30 @@ const SwapableItem = ({
   showModalSwipe,
   checkId,
   buttonHabitSwipe,
-  updateDataCom,
+  iconSwap,
 }) => {
+  // iconSwap = 'green-icon.png';
+  let iconPicked = `../images/${iconSwap}`;
+
   const deleteData = todoID => {
-    axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
-      updateData();
-    });
+    axios
+      .delete(
+        `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${todoID.id}`,
+      )
+      .then(() => {
+        updateData();
+      });
   };
 
-  const completedData = () => {
+  const updateStatus = todoID => {
     axios
-      .post('http://192.168.1.11:3000/completedTodos', {
-        title,
-        subtitle,
-      })
-      .then(() => {
-        axios.delete(`http://192.168.1.11:3000/todos/${todoID.id}`).then(() => {
-          updateData();
-          updateDataCom();
-        });
+      .patch(
+        `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${todoID.id}`,
+        {status: true},
+      )
+      .then(res => {
+        console.log('res updateStatus : ', res);
+        updateData();
       });
   };
 
@@ -51,6 +56,157 @@ const SwapableItem = ({
     ]);
   };
 
+  const returnFunction = icon => {
+    if (icon == '../images/yellow-icon.png') {
+      console.log('yes');
+      return (
+        <ListItem.Content
+        // style={{borderWidth: 1}}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                // source={require(iconPickedFinal)}
+                source={require('../images/yellow-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {title}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                checkId(todoID.id);
+                // updateTask();
+                showModalSwipe();
+                buttonHabitSwipe();
+              }}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../images/icon-edit.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/green-icon.png') {
+      return (
+        <ListItem.Content
+        // style={{borderWidth: 1}}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                source={require('../images/green-icon.png')}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {title}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                checkId(todoID.id);
+                // updateTask();
+                showModalSwipe();
+                buttonHabitSwipe();
+              }}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../images/icon-edit.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/purple-icon.png') {
+      return (
+        <ListItem.Content
+        // style={{borderWidth: 1}}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 50,
+                  marginRight: 20,
+                }}
+                // source={require(iconPickedFinal)}
+                source={require('../images/purple-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {title}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                checkId(todoID.id);
+                // updateTask();
+                showModalSwipe();
+                buttonHabitSwipe();
+              }}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../images/icon-edit.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </ListItem.Content>
+      );
+    }
+    // console.log(icon);
+  };
+
   return (
     <ListItem.Swipeable
       style={{
@@ -66,7 +222,9 @@ const SwapableItem = ({
         <TouchableOpacity
           onPress={() => {
             showAlertCompleted();
-            completedData();
+            console.log(todoID.status);
+            updateStatus(todoID);
+            // completedData(todoID);
             reset();
           }}
           style={{
@@ -87,21 +245,11 @@ const SwapableItem = ({
             source={require('../images/icon-checked.png')}
           />
         </TouchableOpacity>
-        // <Button
-        //   title="Info"
-        //   onPress={() => reset()}
-        //   icon={{name: 'info', color: 'white'}}
-        //   buttonStyle={{minHeight: '100%', marginVertical: 20}}
-        // />
       )}
       rightContent={reset => (
         <TouchableOpacity
           onPress={() => {
-            // console.log(update);
-            // update();
             showAlertDelete();
-            // deleteData(todoID);
-
             reset();
           }}
           style={{
@@ -127,7 +275,8 @@ const SwapableItem = ({
         </TouchableOpacity>
       )}>
       {/* <Button title="My Icon" /> */}
-      <ListItem.Content
+      {returnFunction(iconPicked)}
+      {/* <ListItem.Content
       // style={{borderWidth: 1}}
       >
         <View
@@ -147,7 +296,8 @@ const SwapableItem = ({
                 borderRadius: 50,
                 marginRight: 20,
               }}
-              source={require('../images/green-icon.png')}
+              // source={require(iconPickedFinal)}
+              source={require('../images/purple-icon.png')}
               // source={require(`${props.url}`)}
             />
             <View>
@@ -158,8 +308,9 @@ const SwapableItem = ({
             </View>
           </View>
           <TouchableOpacity
-            onPress={event => {
+            onPress={() => {
               checkId(todoID.id);
+              // updateTask();
               showModalSwipe();
               buttonHabitSwipe();
             }}>
@@ -169,7 +320,7 @@ const SwapableItem = ({
             />
           </TouchableOpacity>
         </View>
-      </ListItem.Content>
+      </ListItem.Content> */}
     </ListItem.Swipeable>
   );
 };

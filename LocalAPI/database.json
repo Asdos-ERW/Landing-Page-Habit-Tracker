@@ -1,4 +1,30 @@
 {
   "todos": [],
-  "completedTodos": []
+  "completedTodos": [
+    {
+      "title": "asd",
+      "subtitle": "asd",
+      "id": 1
+    },
+    {
+      "title": "Sara Hintz",
+      "subtitle": "description 42",
+      "id": 2
+    },
+    {
+      "title": "Sara Hintz",
+      "subtitle": "description 42",
+      "id": 3
+    },
+    {
+      "title": "Judith Lueilwitz MD",
+      "subtitle": "description 46",
+      "id": 4
+    },
+    {
+      "title": "Frances Morissette",
+      "subtitle": "description 50",
+      "id": 5
+    }
+  ]
 }

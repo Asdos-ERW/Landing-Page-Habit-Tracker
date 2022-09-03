@@ -18,39 +18,42 @@ import BottomNavigation from '../../components/bottomNavigation';
 import axios from 'axios';
 
 const index = () => {
+  const [todos, setTodos] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
   const getData = () => {
-    axios.get('http://192.168.1.11:3000/todos').then(res => {
-      setTodos(res.data);
-    });
-  };
-
-  const getComData = () => {
-    axios.get('http://192.168.1.11:3000/completedTodos').then(res => {
-      console.log(res.data);
-      setCompletedTodos(res.data);
-    });
+    axios
+      .get('https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/')
+      .then(res => {
+        setTodos(res.data);
+        console.log('data berhasil di update');
+        // console.log(res.data);
+      });
   };
 
   useEffect(() => {
     getData();
-    getComData();
   }, []);
 
   const [id, setId] = useState(0);
 
-  const handleClick = num => {
+  const getPutId = num => {
     setId(num);
     console.log(id);
   };
 
+  const [iconPicked, setIconPicked] = useState('green-icon.png');
+
+  const getIconPicked = icon => {
+    setIconPicked(icon);
+    // console.log(icon);
+  };
+
   const [buttonHabit, setButtonHabit] = useState('BUAT HABIT');
 
-  const [todos, setTodos] = useState([]);
   const [completedTodos, setCompletedTodos] = useState([]);
 
   return (
@@ -67,7 +70,7 @@ const index = () => {
           showModal={() => {
             toggleModal();
           }}
-          checkItemId={handleClick}
+          checkItemId={getPutId}
           putDataUpNext={() => {
             putData();
           }}
@@ -77,11 +80,12 @@ const index = () => {
           updateComTodos={() => {
             getComData();
           }}
+          iconUpnext={iconPicked}
         />
         <Completed
-          comTodos={completedTodos}
+          comTodos={todos}
           updateData={() => {
-            getComData();
+            getData();
           }}
         />
       </ScrollView>
@@ -99,6 +103,7 @@ const index = () => {
         changeButtonHabitBotNav={() => {
           setButtonHabit('BUAT HABIT');
         }}
+        iconBottom={getIconPicked}
       />
     </View>
   );
@@ -108,7 +113,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F9F9F9',
-    // borderWidth: 1,
     position: 'relative',
   },
 });

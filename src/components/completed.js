@@ -27,15 +27,17 @@ const Completed = ({comTodos, updateData}) => {
           Completed
         </Text>
         {comTodos.map(comTodo => {
-          return (
+          return comTodo.status == true ? (
             <CompletedSwipable
               key={comTodo.id}
-              titleCom={comTodo.title}
-              subtitleCom={comTodo.subtitle}
+              titleCom={comTodo.name}
+              subtitleCom={comTodo.description}
+              iconCom={comTodo.icon}
               idCom={comTodo}
-              updateDataCom={updateData}
+              updateData={updateData}
+              todos={comTodos}
             />
-          );
+          ) : null;
         })}
       </View>
     );
