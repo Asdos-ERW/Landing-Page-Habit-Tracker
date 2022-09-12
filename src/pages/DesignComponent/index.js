@@ -46,15 +46,45 @@ const index = () => {
   };
 
   const [iconPicked, setIconPicked] = useState('green-icon.png');
+  const [nameForUpdate, setNameForUpdate] = useState('');
+  const [descForUpdate, setDescForUpdate] = useState('');
+  const [formName, setFormName] = useState('');
+  const [formDesc, setFormDesc] = useState('');
+
+  const nameUpdateFunction = name => {
+    setNameForUpdate(name);
+    setFormName(name);
+  };
+
+  const descUpdateFunction = desc => {
+    setDescForUpdate(desc);
+    setFormDesc(desc);
+  };
+
+  const setNameFunction = initialName => {
+    setFormName(initialName);
+  };
+
+  const setDescFunction = initialDesc => {
+    setFormDesc(initialDesc);
+  };
+
+  const resetForm = () => {
+    setFormName('');
+    setFormDesc('');
+  };
+
+  console.log('name : ', nameForUpdate);
+  console.log('desc : ', descForUpdate);
 
   const getIconPicked = icon => {
     setIconPicked(icon);
     // console.log(icon);
   };
 
-  const [buttonHabit, setButtonHabit] = useState('BUAT HABIT');
+  const [buttonHabit, setButtonHabit] = useState('CREATE HABIT');
 
-  const [completedTodos, setCompletedTodos] = useState([]);
+  // const [completedTodos, setCompletedTodos] = useState([]);
 
   return (
     <View style={{position: 'relative', flex: 1}}>
@@ -81,6 +111,8 @@ const index = () => {
             getComData();
           }}
           iconUpnext={iconPicked}
+          upNextName={nameUpdateFunction}
+          upNextDesc={descUpdateFunction}
         />
         <Completed
           comTodos={todos}
@@ -101,9 +133,14 @@ const index = () => {
         bottomNavId={id}
         buttonHabitBotNav={buttonHabit}
         changeButtonHabitBotNav={() => {
-          setButtonHabit('BUAT HABIT');
+          setButtonHabit('CREATE HABIT');
+          resetForm();
         }}
         iconBottom={getIconPicked}
+        formNameBottomNav={formName}
+        formDescBottomNav={formDesc}
+        initialNameBottomNav={setNameFunction}
+        initialDescBottomNav={setDescFunction}
       />
     </View>
   );

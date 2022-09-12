@@ -15,7 +15,7 @@ const CompletedSwipable = ({
   const [completed, setCompleted] = useState([]);
 
   let iconPicked = `../images/${iconCom}`;
-  console.log(iconPicked);
+  // console.log(iconPicked);
   const deleteData = () => {
     // console.log(idCom);
     axios

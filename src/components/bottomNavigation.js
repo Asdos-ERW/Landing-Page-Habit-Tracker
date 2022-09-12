@@ -11,6 +11,10 @@ const BottomNavigation = ({
   buttonHabitBotNav,
   changeButtonHabitBotNav,
   iconBottom,
+  formNameBottomNav,
+  formDescBottomNav,
+  initialNameBottomNav,
+  initialDescBottomNav,
 }) => {
   const getData = () => {
     axios.get('http://192.168.1.4:3000/todos').then(res => {
@@ -42,6 +46,10 @@ const BottomNavigation = ({
           changeButtonHabitBotNav();
         }}
         iconModal={iconBottom}
+        nameModal={formNameBottomNav}
+        descModal={formDescBottomNav}
+        initialNameModal={initialNameBottomNav}
+        initialDescModal={initialDescBottomNav}
       />
       <View
         style={{

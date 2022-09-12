@@ -13,6 +13,8 @@ const SwapableItem = ({
   checkId,
   buttonHabitSwipe,
   iconSwap,
+  nameSwapable,
+  descSwapable,
 }) => {
   // iconSwap = 'green-icon.png';
   let iconPicked = `../images/${iconSwap}`;
@@ -58,7 +60,7 @@ const SwapableItem = ({
 
   const returnFunction = icon => {
     if (icon == '../images/yellow-icon.png') {
-      console.log('yes');
+      // console.log('yes');
       return (
         <ListItem.Content
         // style={{borderWidth: 1}}
@@ -95,6 +97,8 @@ const SwapableItem = ({
             <TouchableOpacity
               onPress={() => {
                 checkId(todoID.id);
+                nameSwapable(todoID.name);
+                descSwapable(todoID.description);
                 // updateTask();
                 showModalSwipe();
                 buttonHabitSwipe();
@@ -145,6 +149,8 @@ const SwapableItem = ({
                 // updateTask();
                 showModalSwipe();
                 buttonHabitSwipe();
+                nameSwapable(todoID.name);
+                descSwapable(todoID.description);
               }}>
               <Image
                 style={{width: 24, height: 24}}
@@ -194,6 +200,8 @@ const SwapableItem = ({
                 // updateTask();
                 showModalSwipe();
                 buttonHabitSwipe();
+                nameSwapable(todoID.name);
+                descSwapable(todoID.description);
               }}>
               <Image
                 style={{width: 24, height: 24}}
@@ -204,7 +212,6 @@ const SwapableItem = ({
         </ListItem.Content>
       );
     }
-    // console.log(icon);
   };
 
   return (

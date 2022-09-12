@@ -13,6 +13,8 @@ const UpNext = ({
   checkItemId,
   buttonHabitUpNext,
   iconUpnext,
+  upNextName,
+  upNextDesc,
 }) => {
   // const showAlert = () => {
   //   Alert.alert('nice');
@@ -72,6 +74,8 @@ const UpNext = ({
               buttonHabitSwipe={() => {
                 buttonHabitUpNext();
               }}
+              nameSwapable={upNextName}
+              descSwapable={upNextDesc}
             />
           ) : null;
         })}

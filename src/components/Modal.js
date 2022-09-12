@@ -53,6 +53,10 @@ function ModalComponent({
   buttonHabitModal,
   changeButtonHabitModal,
   iconModal,
+  nameModal,
+  descModal,
+  initialNameModal,
+  initialDescModal,
 }) {
   const akhirID = modalID;
 
@@ -70,35 +74,38 @@ function ModalComponent({
   const [bgDay6, setBgDay6] = useState('white');
   const [bgDay7, setBgDay7] = useState('white');
 
-  const [activity, setActivity] = useState('');
-  const [activityDesc, setActivityDesc] = useState('');
+  // const [activity, setActivity] = useState('');
+  // const [activityDesc, setActivityDesc] = useState('');
 
-  const [buatHabit, setBuatHabit] = useState('BUAT HABIT');
+  const [buatHabit, setBuatHabit] = useState('CREATE HABIT');
 
   const postData = akhirID => {
     const data = {
-      name: activity,
-      description: activityDesc,
+      name: nameModal,
+      description: descModal,
       status: false,
       icon: iconPicked,
     };
 
     const putData = akhirID => {
       // alert('nice');
+      // setActivity('tes');
+      console.log('ok');
       axios
         .put(
           `https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/${akhirID}`,
           data,
         )
-        .then(res => {
+        .then(() => {
           // console.log(res);
           // console.log(akhirID);
           updateDataModal();
-          setBuatHabit('BUAT HABIT');
+
+          setBuatHabit('CREATE HABIT');
         });
     };
 
-    if (buttonHabitModal == 'BUAT HABIT') {
+    if (buttonHabitModal == 'CREATE HABIT') {
       axios
         .post('https://630dca01109c16b9abed4e02.mockapi.io/kegiatanList/', data)
         .then(() => {
@@ -209,9 +216,10 @@ function ModalComponent({
               Name your activity
             </Text>
             <TextInput
-              value={activity}
+              value={nameModal}
               onChangeText={value => {
-                setActivity(value);
+                // setActivity(value);
+                initialNameModal(value);
               }}
               maxLength={20}
               style={{
@@ -229,10 +237,10 @@ function ModalComponent({
               What is is about?
             </Text>
             <TextInput
-              value={activityDesc}
+              value={descModal}
               onChangeText={value => {
-                setActivityDesc(value);
-                // console.log(activityDesc);
+                // setActivityDesc(value);
+                initialDescModal(value);
               }}
               maxLength={25}
               style={{
@@ -396,8 +404,8 @@ function ModalComponent({
               borderRadius: 5,
             }}
             onPress={() => {
-              setActivity('');
-              setActivityDesc('');
+              initialNameModal('');
+              initialDescModal('');
               showModalComponent();
               postData(akhirID);
             }}>
