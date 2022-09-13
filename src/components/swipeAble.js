@@ -79,12 +79,10 @@ const SwapableItem = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
-                // source={require(iconPickedFinal)}
                 source={require('../images/yellow-icon.png')}
-                // source={require(`${props.url}`)}
               />
               <View>
                 <Text
@@ -130,8 +128,8 @@ const SwapableItem = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
                 source={require('../images/green-icon.png')}
               />
@@ -179,11 +177,113 @@ const SwapableItem = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
                 // source={require(iconPickedFinal)}
                 source={require('../images/purple-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {title}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                checkId(todoID.id);
+                // updateTask();
+                showModalSwipe();
+                buttonHabitSwipe();
+                nameSwapable(todoID.name);
+                descSwapable(todoID.description);
+              }}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../images/icon-edit.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/blue-icon.png') {
+      return (
+        <ListItem.Content
+        // style={{borderWidth: 1}}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 12,
+                  marginRight: 15,
+                }}
+                // source={require(iconPickedFinal)}
+                source={require('../images/blue-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {title}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>{subtitle}</Text>
+              </View>
+            </View>
+            <TouchableOpacity
+              onPress={() => {
+                checkId(todoID.id);
+                // updateTask();
+                showModalSwipe();
+                buttonHabitSwipe();
+                nameSwapable(todoID.name);
+                descSwapable(todoID.description);
+              }}>
+              <Image
+                style={{width: 24, height: 24}}
+                source={require('../images/icon-edit.png')}
+              />
+            </TouchableOpacity>
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/orange-icon.png') {
+      return (
+        <ListItem.Content
+        // style={{borderWidth: 1}}
+        >
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 12,
+                  marginRight: 15,
+                }}
+                // source={require(iconPickedFinal)}
+                source={require('../images/orange-icon.png')}
                 // source={require(`${props.url}`)}
               />
               <View>

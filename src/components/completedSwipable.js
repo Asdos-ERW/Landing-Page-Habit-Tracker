@@ -68,8 +68,8 @@ const CompletedSwipable = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
                 source={require('../images/yellow-icon.png')}
                 // source={require(`${props.url}`)}
@@ -106,8 +106,8 @@ const CompletedSwipable = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
                 source={require('../images/green-icon.png')}
                 // source={require(`${props.url}`)}
@@ -144,10 +144,86 @@ const CompletedSwipable = ({
                 style={{
                   width: 48,
                   height: 40,
-                  borderRadius: 50,
-                  marginRight: 20,
+                  borderRadius: 12,
+                  marginRight: 15,
                 }}
                 source={require('../images/purple-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {titleCom}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>
+                  {subtitleCom}
+                </Text>
+              </View>
+            </View>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/blue-icon.png') {
+      return (
+        <ListItem.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+              // borderWidth: 1,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 12,
+                  marginRight: 15,
+                }}
+                source={require('../images/blue-icon.png')}
+                // source={require(`${props.url}`)}
+              />
+              <View>
+                <Text
+                  style={{fontWeight: '600', color: '#0D0C0C', fontSize: 14}}>
+                  {titleCom}
+                </Text>
+                <Text style={{color: '#9F9F9F', fontSize: 11}}>
+                  {subtitleCom}
+                </Text>
+              </View>
+            </View>
+            {/* <Text style={{color: '#9F9F9F', fontSize: 11}}>11.00 AM</Text> */}
+          </View>
+        </ListItem.Content>
+      );
+    } else if (icon == '../images/orange-icon.png') {
+      return (
+        <ListItem.Content>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              // borderWidth: 1,
+              // flex: 1,
+              width: '100%',
+              justifyContent: 'space-between',
+              // borderWidth: 1,
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Image
+                style={{
+                  width: 48,
+                  height: 40,
+                  borderRadius: 12,
+                  marginRight: 15,
+                }}
+                source={require('../images/orange-icon.png')}
                 // source={require(`${props.url}`)}
               />
               <View>

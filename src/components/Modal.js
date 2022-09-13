@@ -33,7 +33,7 @@ const TimePicker = () => {
   return (
     <View style={{alignItems: 'center'}}>
       <TouchableOpacity onPress={showDatePicker}>
-        <Text>SET WAKTU</Text>
+        <Text>PICK TIME</Text>
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -63,6 +63,8 @@ function ModalComponent({
   const [iconBorder1, setIconBorder1] = useState('white');
   const [iconBorder2, setIconBorder2] = useState('white');
   const [iconBorder3, setIconBorder3] = useState('white');
+  const [iconBorder4, setIconBorder4] = useState('white');
+  const [iconBorder5, setIconBorder5] = useState('white');
 
   const [iconPicked, setIconPicked] = useState('green-icon.png');
 
@@ -125,6 +127,8 @@ function ModalComponent({
         setIconBorder1('#A8A8A8');
         setIconBorder2('white');
         setIconBorder3('white');
+        setIconBorder4('white');
+        setIconBorder5('white');
         setIconPicked('yellow-icon.png');
         break;
       }
@@ -133,6 +137,8 @@ function ModalComponent({
         setIconBorder1('white');
         setIconBorder2('#A8A8A8');
         setIconBorder3('white');
+        setIconBorder4('white');
+        setIconBorder5('white');
         setIconPicked('green-icon.png');
         break;
       }
@@ -141,7 +147,29 @@ function ModalComponent({
         setIconBorder1('white');
         setIconBorder2('white');
         setIconBorder3('#A8A8A8');
+        setIconBorder4('white');
+        setIconBorder5('white');
         setIconPicked('purple-icon.png');
+        break;
+      }
+
+      case 'blue': {
+        setIconBorder1('white');
+        setIconBorder2('white');
+        setIconBorder3('white');
+        setIconBorder4('#A8A8A8');
+        setIconBorder5('white');
+        setIconPicked('blue-icon.png');
+        break;
+      }
+
+      case 'orange': {
+        setIconBorder1('white');
+        setIconBorder2('white');
+        setIconBorder3('white');
+        setIconBorder4('white');
+        setIconBorder5('#A8A8A8');
+        setIconPicked('orange-icon.png');
         break;
       }
     }
@@ -265,9 +293,13 @@ function ModalComponent({
             </Text>
             <View
               style={{
-                paddingHorizontal: 30,
+                // paddingHorizontal: 30,
+                paddingLeft: 30,
+                paddingRight: 15,
                 marginVertical: 10,
                 flexDirection: 'row',
+                justifyContent: 'space-between',
+                // borderWidth: 1,
               }}>
               <TouchableOpacity
                 onPress={() => {
@@ -315,6 +347,38 @@ function ModalComponent({
                     borderColor: iconBorder3,
                   }}
                   source={require('../images/purple-icon.png')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  iconPressed('blue');
+                }}
+                style={{width: 60, marginRight: 10}}>
+                <Image
+                  style={{
+                    width: 55,
+                    height: 45,
+                    borderWidth: 2,
+                    borderRadius: 15,
+                    borderColor: iconBorder4,
+                  }}
+                  source={require('../images/blue-icon.png')}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  iconPressed('orange');
+                }}
+                style={{width: 60, marginRight: 10}}>
+                <Image
+                  style={{
+                    width: 55,
+                    height: 45,
+                    borderWidth: 2,
+                    borderRadius: 15,
+                    borderColor: iconBorder5,
+                  }}
+                  source={require('../images/orange-icon.png')}
                 />
               </TouchableOpacity>
             </View>
